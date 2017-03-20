@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+source 'https://rubygems.org'
+
+gem 'berkshelf'
+gem 'chef'
+gem 'chefspec'
+gem 'cookstyle'
+gem 'foodcritic'
+gem 'github_changelog_generator'
+gem 'inspec'
+gem 'kitchen-digitalocean'
+gem 'kitchen-dokken'
+gem 'kitchen-inspec'
+gem 'rake'
+gem 'stove'

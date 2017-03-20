@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 #
 # Cookbook Name:: demo_cookbook
-# Recipe:: _linux
+# Recipe:: _rpm
 #
 # Copyright 2017, JJ Asghar
 #
@@ -17,15 +17,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-# run the correct linux bootstrap recipe
-case node['platform_family']
-when 'debian','ubuntu'
-  include_recipe 'demo_cookbook::_deb'
-when 'redhat', 'centos','fedora'
-  include_recipe 'demo_cookbook::_rpm'
+package 'vim' do
+  action :install
 end
-# run the correct windows bootstrap recipe
-if platform?('windows')
-  include_recipe 'demo_cookbook::_windows'
+
+package 'mg' do
+  action :install
+end
+
+package 'nginx' do
+  action :install
+end
+
+template "/var/www/html/index.nginx-debian.html" do
+  source "index.html.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+end
+
+service "nginx" do
+  supports :status => true, :restart => true, :truereload => true
+  action [ :enable, :start ]
 end
